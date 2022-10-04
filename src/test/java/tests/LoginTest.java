@@ -47,6 +47,19 @@ public class LoginTest extends BaseTest {
     String expectedResultURL = "https://vue-demo.daniel-avellaneda.com/login";
     String actualResultURL = getLoginPage().getDriver().getCurrentUrl();
     Assert.assertTrue(expectedResultURL.contains(actualResultURL));
+  }
 
+  @Test
+  public void displaysErrorsWhenPasswordIsWrong() {
+    getHomePage().openLoginLink();
+
+    getLoginPage().loginWithWrongPassword(faker.internet().password());
+    String expectedResult = "Wrong password";
+    String actualResult = getLoginPage().getErrorMessage().getText();
+    Assert.assertTrue(actualResult.contains(expectedResult));
+
+    String expectedResultURL = "https://vue-demo.daniel-avellaneda.com/login";
+    String actualResultURL = getLoginPage().getDriver().getCurrentUrl();
+    Assert.assertTrue(expectedResultURL.contains(actualResultURL));
   }
 }

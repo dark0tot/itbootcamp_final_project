@@ -41,9 +41,20 @@ public class LoginPage extends BasePage {
     return getPassword().getAttribute("type");
   }
 
-  public void loginWithWrongCredentials(String username, String password) {
-    getEmail().sendKeys(username);
+  public void loginWithWrongCredentials(String email, String password) {
+    getEmail().clear();
+    getPassword().clear();
+    getEmail().sendKeys(email);
     getPassword().sendKeys(password);
-    //getLoginBtn().click();
+    getLoginBtn().click();
+  }
+
+  public void loginWithWrongPassword(String password) {
+    String email = "admin@admin.com";
+    getEmail().clear();
+    getPassword().clear();
+    getEmail().sendKeys(email);
+    getPassword().sendKeys(password);
+    getLoginBtn().click();
   }
 }
