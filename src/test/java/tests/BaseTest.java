@@ -39,4 +39,19 @@ public abstract class BaseTest {
     driver.quit();
   }
 
+  public WebDriver getDriver() {
+    return driver;
+  }
+
+  public WebDriverWait getDriverWait() {
+    return driverWait;
+  }
+
+  public HomePage getHomePage() {
+    return homePage;
+  }
+
+  public LoginPage getLoginPage() {
+    return loginPage;
+  }
 }

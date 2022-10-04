@@ -1,13 +1,18 @@
 package tests;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import org.testng.annotations.BeforeClass;
-import pages.HomePage;
 
 public class LoginTest extends BaseTest {
-  private HomePage loginPage;
 
-  @BeforeClass
-  public void beforeClass() {
-    //loginPage = new LoginPage();
+  @Test
+  public void visitTheLogPage() {
+    Assert.assertTrue(getHomePage().isHomePagePresented());
+    Assert.assertTrue(getHomePage().isLoginLinkPresented());
+    getHomePage().loginLinkCl();
+
+    String expectedResult = "https://vue-demo.daniel-avellaneda.com/login";
+    String actualResult = getLoginPage().getDriver().getCurrentUrl();
+    Assert.assertTrue(expectedResult.contains(actualResult));
   }
 }
