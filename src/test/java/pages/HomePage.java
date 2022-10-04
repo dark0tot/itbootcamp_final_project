@@ -30,7 +30,7 @@ public class HomePage extends BasePage{
     return getLoginLink().isDisplayed();
   }
 
-  public void loginLinkCl() {
+  public void openLoginLink() {
     getLoginLink().click();
   }
 }
