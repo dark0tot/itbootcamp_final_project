@@ -18,4 +18,16 @@ public class AdminCitiesTests extends BaseTest{
     getLoggedHomePage().isLogoutPresented();
     getLoggedHomePage().logoutNow();
   }
+
+  @Test
+  public void createNewCityTest(){
+    getHomePage().openLoginLink();
+    getLoginPage().loginWithWalidCredentials();
+    getLoggedHomePage().adminLink();
+    getLoggedHomePage().citiesLink();
+
+    getCitiesPage().getNewItem().click();
+    getCitiesPage().getName().sendKeys("Darko");
+    getCitiesPage().getSave().click();
+  }
 }

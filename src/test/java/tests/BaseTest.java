@@ -7,10 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import pages.HomePage;
-import pages.LoggedHomePage;
-import pages.LoginPage;
-import pages.SingUpPage;
+import pages.*;
 
 import java.time.Duration;
 
@@ -23,6 +20,7 @@ public abstract class BaseTest {
   private LoginPage loginPage;
   private LoggedHomePage loggedHomePage;
   private SingUpPage singUpPage;
+  private CitiesPage citiesPage;
 
 
   @BeforeClass
@@ -38,6 +36,7 @@ public abstract class BaseTest {
     loginPage = new LoginPage(driver, driverWait, faker);
     loggedHomePage = new LoggedHomePage(driver,driverWait,faker);
     singUpPage = new SingUpPage(driver, driverWait, faker);
+    citiesPage = new CitiesPage(driver,driverWait,faker);
   }
 
   @BeforeMethod
@@ -71,4 +70,6 @@ public abstract class BaseTest {
   public LoggedHomePage getLoggedHomePage() { return loggedHomePage; }
 
   public SingUpPage getSingUpPage() { return singUpPage; }
+
+  public CitiesPage getCitiesPage() { return citiesPage; }
 }
