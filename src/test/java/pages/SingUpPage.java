@@ -13,6 +13,7 @@ public class SingUpPage extends BasePage{
   private By password = By.id("password");
   private By confirmPassword = By.id("confirmPassword");
   private By signMeUpBtn = By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button");
+  private By errorMessage = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]");
 
   public SingUpPage(WebDriver driver, WebDriverWait driverWait, Faker faker) {
     super(driver, driverWait, faker);
@@ -36,6 +37,9 @@ public class SingUpPage extends BasePage{
   public WebElement getSignMeUpBtn() {
     return getDriver().findElement(signMeUpBtn);
   }
+  public WebElement getErrorMessage() {
+    return getDriver().findElement(errorMessage);
+  }
 
   public String typeCheckEmail() {
     return getEmail().getAttribute("type");
@@ -48,5 +52,16 @@ public class SingUpPage extends BasePage{
   }
   public boolean isSignUpPageViewPresented() {
     return getSignUpPageView().isDisplayed();
+  }
+  public void singUpWithExistingUser() {
+    getName().clear();
+    getEmail().clear();
+    getPassword().clear();
+    getConfirmPassword().clear();
+    getName().sendKeys("Test Test");
+    getEmail().sendKeys("admin@admin.com");
+    getPassword().sendKeys("123654");
+    getConfirmPassword().sendKeys("123654");
+    getSignMeUpBtn().click();
   }
 }

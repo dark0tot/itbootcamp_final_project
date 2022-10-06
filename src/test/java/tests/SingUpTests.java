@@ -41,6 +41,14 @@ public class SingUpTests extends BaseTest{
     getHomePage().openSingUpLink();
     getSingUpPage().isSignUpPageViewPresented();
 
+    getSingUpPage().singUpWithExistingUser();
 
+    String expectedResult = "E-mail already exists";
+    String actualResult = getSingUpPage().getErrorMessage().getText();
+    Assert.assertTrue(actualResult.contains(expectedResult));
+
+    String expectedResultURL = "https://vue-demo.daniel-avellaneda.com/signup";
+    String actualResultURL = getLoginPage().getDriver().getCurrentUrl();
+    Assert.assertEquals(expectedResultURL,actualResultURL);
   }
 }
