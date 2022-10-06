@@ -63,8 +63,7 @@ public class SingUpTests extends BaseTest{
     Assert.assertTrue(actualResult.contains(expectedResult));
 
     getSingUpPage().closeNotification();
-    getSingUpPage().isLogoutLinkPresented();
-    getSingUpPage().logoutNow();
-
+    getLoggedHomePage().isLogoutPresented();
+    getLoggedHomePage().logoutNow();
   }
 }
