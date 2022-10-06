@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import pages.HomePage;
 import pages.LoggedHomePage;
 import pages.LoginPage;
+import pages.SingUpPage;
 
 import java.time.Duration;
 
@@ -21,7 +22,7 @@ public abstract class BaseTest {
   private HomePage homePage;
   private LoginPage loginPage;
   private LoggedHomePage loggedHomePage;
-
+  private SingUpPage singUpPage;
 
 
   @BeforeClass
@@ -36,6 +37,7 @@ public abstract class BaseTest {
     homePage = new HomePage(driver, driverWait, faker);
     loginPage = new LoginPage(driver, driverWait, faker);
     loggedHomePage = new LoggedHomePage(driver,driverWait,faker);
+    singUpPage = new SingUpPage(driver, driverWait, faker);
   }
 
   @BeforeMethod
@@ -67,4 +69,6 @@ public abstract class BaseTest {
   }
 
   public LoggedHomePage getLoggedHomePage() { return loggedHomePage; }
+
+  public SingUpPage getSingUpPage() { return singUpPage; }
 }

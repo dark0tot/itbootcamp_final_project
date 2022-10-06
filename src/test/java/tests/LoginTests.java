@@ -69,11 +69,7 @@ public class LoginTests extends BaseTest {
     getHomePage().openLoginLink();
 
     getLoginPage().loginWithWalidCredentials();
-   /* try {
-      Thread.sleep(5000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }*/
+
     //getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[2]/div[1]/a"), "Buy me a coffee"));
     getDriverWait().until(ExpectedConditions.urlContains("/home"));
 
