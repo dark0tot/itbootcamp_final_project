@@ -31,8 +31,8 @@ public abstract class BaseTest {
     driver = new ChromeDriver();
     driver.get("https://vue-demo.daniel-avellaneda.com/");
     driver.manage().window().maximize();
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-    driverWait = new WebDriverWait(driver,Duration.ofSeconds(2));
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+    driverWait = new WebDriverWait(driver,Duration.ofSeconds(5));
     faker = new Faker();
     homePage = new HomePage(driver, driverWait, faker);
     loginPage = new LoginPage(driver, driverWait, faker);

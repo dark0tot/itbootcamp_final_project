@@ -14,6 +14,9 @@ public class SingUpPage extends BasePage{
   private By confirmPassword = By.id("confirmPassword");
   private By signMeUpBtn = By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button");
   private By errorMessage = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]");
+  private By verifyMessage = By.xpath("//*[@id=\"app\"]/div[4]/div/div");
+  private By closeBtn = By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[3]/button");
+  private By logout = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]");
 
   public SingUpPage(WebDriver driver, WebDriverWait driverWait, Faker faker) {
     super(driver, driverWait, faker);
@@ -40,6 +43,15 @@ public class SingUpPage extends BasePage{
   public WebElement getErrorMessage() {
     return getDriver().findElement(errorMessage);
   }
+  public WebElement getVerifyMessage() {
+    return getDriver().findElement(verifyMessage);
+  }
+  public WebElement getCloseBtn() {
+    return getDriver().findElement(closeBtn);
+  }
+  public WebElement getLogout() {
+    return getDriver().findElement(logout);
+  }
 
   public String typeCheckEmail() {
     return getEmail().getAttribute("type");
@@ -53,6 +65,12 @@ public class SingUpPage extends BasePage{
   public boolean isSignUpPageViewPresented() {
     return getSignUpPageView().isDisplayed();
   }
+  public boolean isLogoutLinkPresented() {
+    return getLogout().isDisplayed();
+  }
+  public void logoutNow() {
+    getLogout().click();
+  }
   public void singUpWithExistingUser() {
     getName().clear();
     getEmail().clear();
@@ -63,5 +81,21 @@ public class SingUpPage extends BasePage{
     getPassword().sendKeys("123654");
     getConfirmPassword().sendKeys("123654");
     getSignMeUpBtn().click();
+  }
+
+  public void singUpWithNewUser(String name, String email, String password, String confirmPassword) {
+    getName().clear();
+    getEmail().clear();
+    getPassword().clear();
+    getConfirmPassword().clear();
+    getName().sendKeys(name);
+    getEmail().sendKeys(email);
+    getPassword().sendKeys(password);
+    getConfirmPassword().sendKeys(confirmPassword);
+    getSignMeUpBtn().click();
+  }
+
+  public void closeNotification() {
+    getCloseBtn().click();
   }
 }

@@ -11,7 +11,7 @@ public class SingUpTests extends BaseTest{
   public void visitSingUpPage() {
     getHomePage().isSingUpLinkPresented();
     getHomePage().openSingUpLink();
-
+    getSingUpPage().isSignUpPageViewPresented();
     getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button"), "SIGN ME UP"));
 
     String expectedResult = "https://vue-demo.daniel-avellaneda.com/signup";
@@ -24,7 +24,6 @@ public class SingUpTests extends BaseTest{
     getHomePage().isSingUpLinkPresented();
     getHomePage().openSingUpLink();
     getSingUpPage().isSignUpPageViewPresented();
-
     getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button"), "SIGN ME UP"));
 
     String actualEmailType = getSingUpPage().typeCheckEmail();
@@ -40,7 +39,6 @@ public class SingUpTests extends BaseTest{
     getHomePage().isSingUpLinkPresented();
     getHomePage().openSingUpLink();
     getSingUpPage().isSignUpPageViewPresented();
-
     getSingUpPage().singUpWithExistingUser();
 
     String expectedResult = "E-mail already exists";
@@ -50,5 +48,23 @@ public class SingUpTests extends BaseTest{
     String expectedResultURL = "https://vue-demo.daniel-avellaneda.com/signup";
     String actualResultURL = getLoginPage().getDriver().getCurrentUrl();
     Assert.assertEquals(expectedResultURL,actualResultURL);
+  }
+
+  @Test
+  public void singUpTest() {
+    getHomePage().isSingUpLinkPresented();
+    getHomePage().openSingUpLink();
+    getSingUpPage().isSignUpPageViewPresented();
+    getSingUpPage().singUpWithNewUser("Darko Tot", getFaker().internet().emailAddress(), "123456","123456");
+
+    getDriverWait().until(ExpectedConditions.textToBe(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"), "IMPORTANT: Verify your account"));
+    String expectedResult = "IMPORTANT: Verify your account";
+    String actualResult = getSingUpPage().getVerifyMessage().getText();
+    Assert.assertTrue(actualResult.contains(expectedResult));
+
+    getSingUpPage().closeNotification();
+    getSingUpPage().isLogoutLinkPresented();
+    getSingUpPage().logoutNow();
+
   }
 }
