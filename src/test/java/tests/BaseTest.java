@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.HomePage;
+import pages.LoggedHomePage;
 import pages.LoginPage;
 
 import java.time.Duration;
@@ -16,9 +17,12 @@ public abstract class BaseTest {
 
   private WebDriver driver;
   private WebDriverWait driverWait;
+  private Faker faker;
   private HomePage homePage;
   private LoginPage loginPage;
-  public Faker faker;
+  private LoggedHomePage loggedHomePage;
+
+
 
   @BeforeClass
   public void beforeClass() {
@@ -27,15 +31,17 @@ public abstract class BaseTest {
     driver.get("https://vue-demo.daniel-avellaneda.com/");
     driver.manage().window().maximize();
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-    homePage = new HomePage(driver, driverWait);
-    loginPage = new LoginPage(driver, driverWait);
+    driverWait = new WebDriverWait(driver,Duration.ofSeconds(2));
     faker = new Faker();
+    homePage = new HomePage(driver, driverWait, faker);
+    loginPage = new LoginPage(driver, driverWait, faker);
+    loggedHomePage = new LoggedHomePage(driver,driverWait,faker);
   }
 
   @BeforeMethod
   public void beforeMethod() {
-    driver.get("https://vue-demo.daniel-avellaneda.com/");
     driver.manage().deleteAllCookies();
+    driver.get("https://vue-demo.daniel-avellaneda.com/");
   }
 
   @AfterClass
@@ -50,6 +56,7 @@ public abstract class BaseTest {
   public WebDriverWait getDriverWait() {
     return driverWait;
   }
+  public Faker getFaker() { return faker; }
 
   public HomePage getHomePage() {
     return homePage;
@@ -58,4 +65,6 @@ public abstract class BaseTest {
   public LoginPage getLoginPage() {
     return loginPage;
   }
+
+  public LoggedHomePage getLoggedHomePage() { return loggedHomePage; }
 }

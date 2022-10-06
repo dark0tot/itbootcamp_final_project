@@ -12,8 +12,9 @@ public class LoginPage extends BasePage {
   private By password = By.id("password");
   private By loginBtn = By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div/div/div[3]/span/form/div/div[3]/button");
   private By errorMessage = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li");
-  public LoginPage(WebDriver driver, WebDriverWait driverWait) {
-    super(driver, driverWait);
+
+  public LoginPage(WebDriver driver, WebDriverWait driverWait, Faker faker) {
+    super(driver, driverWait, faker);
   }
 
   public WebElement getLoginPageShow() {
@@ -51,6 +52,16 @@ public class LoginPage extends BasePage {
 
   public void loginWithWrongPassword(String password) {
     String email = "admin@admin.com";
+    getEmail().clear();
+    getPassword().clear();
+    getEmail().sendKeys(email);
+    getPassword().sendKeys(password);
+    getLoginBtn().click();
+  }
+
+  public void loginWithWalidCredentials() {
+    String email = "admin@admin.com";
+    String password = "12345";
     getEmail().clear();
     getPassword().clear();
     getEmail().sendKeys(email);
