@@ -87,6 +87,25 @@ public class AdminCitiesTests extends BaseTest{
 
   @Test (priority = 5)
   public void deleteCity() {
+    getHomePage().openLoginLink();
+    getLoginPage().loginWithWalidCredentials();
+    getLoggedHomePage().adminLink();
+    getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[3]/div[1]/a[1]"),"Cities"));
+    getLoggedHomePage().citiesLink();
 
+    getCitiesPage().searchWishedCity("Shibby");
+    getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")));
+    String expectedResult = "Shibby";
+    String actualResult = getCitiesPage().getColumnName().getText();
+    Assert.assertTrue(actualResult.contains(expectedResult));
+
+    getCitiesPage().deleteWishedCity();
+    getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.className("text--lighten3")));
+    getCitiesPage().getDeleteCityConfirm().click();
+
+    getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"), "Deleted successfully"));
+    String expectedResultMessage = "Deleted successfully";
+    String actualResultMessage = getCitiesPage().getSuccessMessage().getText();
+    Assert.assertTrue(actualResultMessage.contains(expectedResultMessage));
   }
 }

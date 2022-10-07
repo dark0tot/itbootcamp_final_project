@@ -14,7 +14,7 @@ public class CitiesPage extends LoggedHomePage{
   private By successMessage = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]");
   private By searchCity = By.id("search");
   private By deleteCity = By.id("delete");
-  private By deleteCityConfirm = By.className("red--text");
+  private By deleteCityConfirm = By.className("text--lighten3");
   private By deleteCityCancel = By.className("green--text");
   private By editCity = By.id("edit");
   private By editItemPopUp = By.xpath("//*[@id=\"app\"]/div[3]/div/div/div[2]/div");

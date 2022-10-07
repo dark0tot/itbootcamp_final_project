@@ -53,7 +53,6 @@ public abstract class BaseTest {
   public WebDriver getDriver() {
     return driver;
   }
-
   public WebDriverWait getDriverWait() {
     return driverWait;
   }
