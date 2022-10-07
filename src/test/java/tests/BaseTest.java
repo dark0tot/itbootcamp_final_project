@@ -21,7 +21,7 @@ public abstract class BaseTest {
   private LoggedHomePage loggedHomePage;
   private SingUpPage singUpPage;
   private CitiesPage citiesPage;
-
+  private MyProfilePage myProfilePage;
 
   @BeforeClass
   public void beforeClass() {
@@ -37,6 +37,7 @@ public abstract class BaseTest {
     loggedHomePage = new LoggedHomePage(driver,driverWait,faker);
     singUpPage = new SingUpPage(driver, driverWait, faker);
     citiesPage = new CitiesPage(driver,driverWait,faker);
+    myProfilePage = new MyProfilePage(driver,driverWait,faker);
   }
 
   @BeforeMethod
@@ -71,4 +72,6 @@ public abstract class BaseTest {
   public SingUpPage getSingUpPage() { return singUpPage; }
 
   public CitiesPage getCitiesPage() { return citiesPage; }
+
+  public MyProfilePage getMyProfilePage() { return myProfilePage; }
 }
