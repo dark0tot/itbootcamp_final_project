@@ -20,6 +20,7 @@ public class CitiesPage extends LoggedHomePage{
   private By editItemPopUp = By.xpath("//*[@id=\"app\"]/div[3]/div/div/div[2]/div");
   private By editItemTextBox = By.id("name");  ////*[@id="name"]
   private By editItemSaveBtn = By.className("green--text");
+  private By columnName = By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]");
 
 
   public CitiesPage(WebDriver driver, WebDriverWait driverWait, Faker faker) {
@@ -47,6 +48,7 @@ public class CitiesPage extends LoggedHomePage{
   public WebElement getEditItemPopUp() { return getDriver().findElement(editItemPopUp); }
   public WebElement getEditItemTextBox() { return getDriver().findElement(editItemTextBox); }
   public WebElement getEditItemSaveBtn() { return getDriver().findElement(editItemSaveBtn); }
+  public WebElement getColumnName() { return getDriver().findElement(columnName); }
 
   public void addNewCity(String city) {
     getNewItem().click();

@@ -65,5 +65,28 @@ public class AdminCitiesTests extends BaseTest{
     //getCitiesPage().isEditItemPopUpPresented();
     getCitiesPage().insertEditItemPopUpText(" - edited");
 
+    getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"), "Saved successfully"));
+    String expectedResult = "Saved successfully";
+    String actualResult = getCitiesPage().getSuccessMessage().getText();
+    Assert.assertTrue(actualResult.contains(expectedResult));
+  }
+
+  @Test (priority = 4)
+  public void searchCity() {
+    getHomePage().openLoginLink();
+    getLoginPage().loginWithWalidCredentials();
+    getLoggedHomePage().adminLink();
+    getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[3]/div[1]/a[1]"),"Cities"));
+    getLoggedHomePage().citiesLink();
+
+    getCitiesPage().searchWishedCity("Shibby - edited");
+    String expectedResult = "Shibby - edited";
+    String actualResult = getCitiesPage().getColumnName().getText();
+    Assert.assertEquals(expectedResult, actualResult);
+  }
+
+  @Test (priority = 5)
+  public void deleteCity() {
+
   }
 }
