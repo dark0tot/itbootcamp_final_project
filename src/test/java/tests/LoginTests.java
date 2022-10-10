@@ -1,10 +1,16 @@
 package tests;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 
 public class LoginTests extends BaseTest {
+  @BeforeMethod
+  public void beforeMethod() {
+    getDriver().manage().deleteAllCookies();
+    getDriver().get("https://vue-demo.daniel-avellaneda.com/");
+  }
 
   @Test
   public void visitTheLogPage() {
@@ -70,9 +76,7 @@ public class LoginTests extends BaseTest {
 
     getLoginPage().loginWithWalidCredentials();
 
-    //getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[2]/div[1]/a"), "Buy me a coffee"));
     getDriverWait().until(ExpectedConditions.urlContains("/home"));
-
 
     String expectedResultURL = "https://vue-demo.daniel-avellaneda.com/home";
     String actualResultURL = getLoginPage().getDriver().getCurrentUrl();

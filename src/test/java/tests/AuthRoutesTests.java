@@ -1,9 +1,15 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class AuthRoutesTests extends BaseTest{
+  @BeforeMethod
+  public void beforeMethod() {
+    getDriver().manage().deleteAllCookies();
+  }
+
   @Test
   public void forbidsVisitsToHomeUrlIfNotAuthenticated() {
     getDriver().get("https://vue-demo.daniel-avellaneda.com/home");

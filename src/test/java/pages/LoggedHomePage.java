@@ -11,7 +11,7 @@ public class LoggedHomePage extends BasePage {
   private By about = By.xpath("//*[@id=\"app\"]/div/div/header/div/div[3]/a[2]");
   private By myProfile = By.className("btnProfile");
   private By admin = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]");
-  private By logout = By.xpath("//*[@id=\"app\"]/div/div/header/div/div[3]/button[2]");
+  private By logout = By.className("btnLogout");
   private By cities = By.xpath("//*[@id=\"app\"]/div[3]/div[1]/a[1]"); ////*[@id="app"]/div[3]/div[1]/a[1]
   private By users = By.xpath("//*[@id=\"list-item-178\"]");
 

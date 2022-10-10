@@ -3,9 +3,15 @@ package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ProfileTests extends BaseTest{
+  @BeforeMethod
+  public void beforeMethod() {
+    getDriver().manage().deleteAllCookies();
+    getDriver().get("https://vue-demo.daniel-avellaneda.com/");
+  }
 
   @Test
   public void editsProfile() {

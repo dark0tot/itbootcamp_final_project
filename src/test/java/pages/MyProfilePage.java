@@ -78,7 +78,7 @@ public class MyProfilePage extends BasePage{
   }
   public void editMyProfileCity(String city) {
     getMyProfileCity().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
-    getMyProfileCity().sendKeys(city);
+    getMyProfileCity().sendKeys(city); //ostao je city za unos manuelno jer mora se uzeti postojeci grad u bazi
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {

@@ -40,11 +40,11 @@ public abstract class BaseTest {
     myProfilePage = new MyProfilePage(driver,driverWait,faker);
   }
 
-  @BeforeMethod
+ /* @BeforeMethod
   public void beforeMethod() {
     driver.manage().deleteAllCookies();
     driver.get("https://vue-demo.daniel-avellaneda.com/");
-  }
+  }*/
 
   @AfterClass
   public void afterClass() {
