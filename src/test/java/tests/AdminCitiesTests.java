@@ -1,6 +1,5 @@
 package tests;
 
-import net.bytebuddy.build.Plugin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -19,6 +18,7 @@ public class AdminCitiesTests extends BaseTest{
     getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[3]/div[1]/a[1]"),"Cities"));
     getLoggedHomePage().citiesLink();
   }
+
   @AfterMethod
   public void afterMethod() {
     getLoggedHomePage().logoutNow();

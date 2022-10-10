@@ -10,14 +10,13 @@ public class LoginTests extends BaseTest {
   public void beforeMethod() {
     getDriver().manage().deleteAllCookies();
     getDriver().get("https://vue-demo.daniel-avellaneda.com/");
+    Assert.assertTrue(getHomePage().isHomePagePresented());
+    Assert.assertTrue(getHomePage().isLoginLinkPresented());
+    getHomePage().openLoginLink();
   }
 
   @Test
   public void visitTheLogPage() {
-    Assert.assertTrue(getHomePage().isHomePagePresented());
-    Assert.assertTrue(getHomePage().isLoginLinkPresented());
-    getHomePage().openLoginLink();
-
     String expectedResult = "https://vue-demo.daniel-avellaneda.com/login";
     String actualResult = getLoginPage().getDriver().getCurrentUrl();
     Assert.assertEquals(expectedResult,actualResult);
@@ -25,8 +24,6 @@ public class LoginTests extends BaseTest {
 
   @Test
   public void checksInputTypes() {
-    getHomePage().openLoginLink();
-
     Assert.assertTrue(getLoginPage().isLoginPagePresented());
 
     String actualEmailType = getLoginPage().typeCheckEmail();
@@ -37,8 +34,6 @@ public class LoginTests extends BaseTest {
 
   @Test
   public void displaysErrorsWhenUserDoesNotExist() {
-    getHomePage().openLoginLink();
-
     getLoginPage().loginWithWrongCredentials((getFaker().internet().emailAddress()), getFaker().internet().password());
 
     String expectedResult = "User does not exists";
@@ -58,8 +53,6 @@ public class LoginTests extends BaseTest {
 
   @Test
   public void displaysErrorsWhenPasswordIsWrong() {
-    getHomePage().openLoginLink();
-
     getLoginPage().loginWithWrongPassword(getFaker().internet().password());
     String expectedResult = "Wrong password";
     String actualResult = getLoginPage().getErrorMessage().getText();
@@ -72,8 +65,6 @@ public class LoginTests extends BaseTest {
 
   @Test
   public void loginWithWalidCredentials() {
-    getHomePage().openLoginLink();
-
     getLoginPage().loginWithWalidCredentials();
 
     getDriverWait().until(ExpectedConditions.urlContains("/home"));
@@ -87,8 +78,6 @@ public class LoginTests extends BaseTest {
 
   @Test
   public void logout() {
-    getHomePage().openLoginLink();
-
     getLoginPage().loginWithWalidCredentials();
     getDriverWait().until(ExpectedConditions.urlContains("/home"));
 

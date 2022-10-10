@@ -24,7 +24,7 @@ public class SingUpTests extends BaseTest{
 
     String expectedResult = "https://vue-demo.daniel-avellaneda.com/signup";
     String actualResult = getLoginPage().getDriver().getCurrentUrl();
-    Assert.assertEquals(expectedResult,actualResult);
+    Assert.assertEquals(expectedResult, actualResult);
   }
 
   @Test
@@ -51,7 +51,7 @@ public class SingUpTests extends BaseTest{
 
     String expectedResultURL = "https://vue-demo.daniel-avellaneda.com/signup";
     String actualResultURL = getLoginPage().getDriver().getCurrentUrl();
-    Assert.assertEquals(expectedResultURL,actualResultURL);
+    Assert.assertEquals(expectedResultURL, actualResultURL);
   }
 
   @Test
