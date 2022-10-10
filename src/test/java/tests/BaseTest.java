@@ -30,14 +30,14 @@ public abstract class BaseTest {
         driver.get("https://vue-demo.daniel-avellaneda.com/");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driverWait = new WebDriverWait(driver,Duration.ofSeconds(5));
+        driverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         faker = new Faker();
         homePage = new HomePage(driver, driverWait, faker);
         loginPage = new LoginPage(driver, driverWait, faker);
-        loggedHomePage = new LoggedHomePage(driver,driverWait,faker);
+        loggedHomePage = new LoggedHomePage(driver,driverWait, faker);
         singUpPage = new SingUpPage(driver, driverWait, faker);
-        citiesPage = new CitiesPage(driver,driverWait,faker);
-        myProfilePage = new MyProfilePage(driver,driverWait,faker);
+        citiesPage = new CitiesPage(driver, driverWait, faker);
+        myProfilePage = new MyProfilePage(driver, driverWait, faker);
     }
 
  /* @BeforeMethod
@@ -54,9 +54,11 @@ public abstract class BaseTest {
     public WebDriver getDriver() {
         return driver;
     }
+
     public WebDriverWait getDriverWait() {
         return driverWait;
     }
+
     public Faker getFaker() { return faker; }
 
     public HomePage getHomePage() {
