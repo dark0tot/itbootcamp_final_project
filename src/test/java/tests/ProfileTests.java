@@ -13,28 +13,43 @@ public class ProfileTests extends BaseTest{
     getLoginPage().loginWithWalidCredentials();
     getLoggedHomePage().getMyProfile().click();
 
-    getMyProfilePage().editMyProfileName(getFaker().name().fullName());
-    getMyProfilePage().editMyProfilePhone(getFaker().phoneNumber().toString());
+    getMyProfilePage().editMyProfileName();
+    getMyProfilePage().editMyProfilePhone();
     getMyProfilePage().editMyProfileCity("Oakland");
-    getMyProfilePage().editMyProfileCountry(getFaker().address().country());
-    getMyProfilePage().editMyProfileTwitter(getFaker().internet().avatar());
-    getMyProfilePage().editMyProfileGitHub(getFaker().internet().avatar());
+    getMyProfilePage().editMyProfileCountry();
+    getMyProfilePage().editMyProfileTwitter();
+    getMyProfilePage().editMyProfileGitHub();
 
     getMyProfilePage().getMyProfileSaveButton().click();
-    try {
-      Thread.sleep(500);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"), "Profile saved successfully"));
-    try {
-      Thread.sleep(500);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    String expectedResult = "Profile saved successfully";
-    String actualResult = getCitiesPage().getSuccessMessage().getText();
-    Assert.assertTrue(actualResult.contains(expectedResult));
+
+    getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"), "Profile saved successfuly"));
+    String expectedResultMessage = "Profile saved successfuly";
+    String actualResultMessage = getCitiesPage().getSuccessMessage().getText();
+    Assert.assertTrue(actualResultMessage.contains(expectedResultMessage));
+
+    String expectedName = getMyProfilePage().getName();
+    String actualName = getMyProfilePage().getMyProfileName().getAttribute("value");
+    Assert.assertEquals(actualName, expectedName);
+
+    String expectedPhone = getMyProfilePage().getPhone();
+    String actualPhone = getMyProfilePage().getMyProfilePhone().getAttribute("value");
+    Assert.assertEquals(actualPhone, expectedPhone);
+
+    String expectedCity = "Oakland";
+    String actualCity = getMyProfilePage().getMyProfileCity().getAttribute("value");
+    Assert.assertEquals(actualCity, expectedCity);
+
+    String expectedCountry = getMyProfilePage().getCountry();
+    String actualCountry = getMyProfilePage().getMyProfileCountry().getAttribute("value");
+    Assert.assertEquals(actualCountry, expectedCountry);
+
+    String expectedTwitterProfile = getMyProfilePage().getTwitter();
+    String actualTwitterProfile = getMyProfilePage().getMyProfileTwitter().getAttribute("value");
+    Assert.assertEquals(actualTwitterProfile, expectedTwitterProfile);
+
+    String expectedGitHubProfile = getMyProfilePage().getGitHub();
+    String actualGitHubProfile = getMyProfilePage().getMyProfileGitHub().getAttribute("value");
+    Assert.assertEquals(actualGitHubProfile, expectedGitHubProfile);
 
     getLoggedHomePage().logoutNow();
   }

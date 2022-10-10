@@ -17,9 +17,30 @@ public class MyProfilePage extends BasePage{
   private By myProfileGitHub = By.id("urlGitHub");
   private By myProfileSaveButton = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div/div[8]/button");
   private By profileSaved = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]");
+  private final String name = getFaker().name().firstName();
+  private final String phone = getFaker().phoneNumber().phoneNumber();
+  private final String country = getFaker().address().country();
+  private final String twitter = getFaker().internet().avatar();
+  private final String gitHub = getFaker().internet().avatar();
 
   public MyProfilePage(WebDriver driver, WebDriverWait driverWait, Faker faker) {
     super(driver, driverWait, faker);
+  }
+
+  public String getName() {
+    return name;
+  }
+  public String getPhone() {
+    return phone;
+  }
+  public String getCountry() {
+    return country;
+  }
+  public String getTwitter() {
+    return twitter;
+  }
+  public String getGitHub() {
+    return gitHub;
   }
 
   public WebElement getMyProfileName() {
@@ -47,40 +68,38 @@ public class MyProfilePage extends BasePage{
     return getDriver().findElement(profileSaved);
   }
 
-  public void editMyProfileName(String name) {
+  public void editMyProfileName() {
     getMyProfileName().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
-    getMyProfileName().sendKeys(name);
+    getMyProfileName().sendKeys(getName());
   }
-  public void editMyProfilePhone(String phone) {
+  public void editMyProfilePhone() {
     getMyProfilePhone().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
-    getMyProfilePhone().sendKeys(phone);
+    getMyProfilePhone().sendKeys(getPhone());
   }
   public void editMyProfileCity(String city) {
     getMyProfileCity().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
     getMyProfileCity().sendKeys(city);
-  /*  try {
-      Thread.sleep(1000);
+    try {
+      Thread.sleep(500);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+    getMyProfileCity().sendKeys(Keys.ENTER);
+  /*
     Select selectCity = new Select(getDriver().findElement(By.id("city")));
     try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
     selectCity.selectByVisibleText(city);*/
   }
-  public void editMyProfileCountry(String country) {
+  public void editMyProfileCountry() {
     getMyProfileCountry().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
-    getMyProfileCountry().sendKeys(country);
+    getMyProfileCountry().sendKeys(getCountry());
   }
-  public void editMyProfileTwitter(String twitter) {
+  public void editMyProfileTwitter() {
     getMyProfileTwitter().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
-    getMyProfileTwitter().sendKeys(twitter);
+    getMyProfileTwitter().sendKeys(getTwitter());
   }
-  public void editMyProfileGitHub(String gitHub) {
+  public void editMyProfileGitHub() {
     getMyProfileGitHub().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
-    getMyProfileGitHub().sendKeys(gitHub);
+    getMyProfileGitHub().sendKeys(getGitHub());
   }
 }
