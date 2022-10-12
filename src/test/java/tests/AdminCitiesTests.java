@@ -17,7 +17,7 @@ public class AdminCitiesTests extends BaseTest {
         getLoggedHomePage().citiesLink();
     }
 
-    // Verify that when you log in with walid credentials and go to cities page, in page URL is presented /admin/cities rout.
+    // Verify that when user is logged in with walid credentials and go to cities page, in page URL is presented /admin/cities rout.
     // Verify that logout button is presented when the user is logged in.
     @Test(priority = 1)
     public void visitsTheAdminCitiesPage() {
