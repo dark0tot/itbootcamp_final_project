@@ -10,16 +10,15 @@ public class SingUpTests extends BaseTest{
 
     @BeforeMethod
     public void beforeMethod() {
-        getDriver().manage().deleteAllCookies();
-        getDriver().get("https://vue-demo.daniel-avellaneda.com/");
+        super.beforeMethod();
         getHomePage().isSingUpLinkPresented();
         getHomePage().openSingUpLink();
         getSingUpPage().isSignUpPageViewPresented();
     }
 
+    // Verify that the /singup route appears in the URL of the page.
     @Test
     public void visitSingUpPage() {
-
         getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button"), "SIGN ME UP"));
 
         String expectedResult = "https://vue-demo.daniel-avellaneda.com/signup";
@@ -27,9 +26,11 @@ public class SingUpTests extends BaseTest{
         Assert.assertEquals(expectedResult, actualResult);
     }
 
+    // Verify that the email input field for the type attribute has the value email.
+    // Verify that the password input field for the type attribute has the value password.
+    //  Verify that the confirmation password input field for the type attribute has the value password.
     @Test
     public void checksInputTypes() {
-
         getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button"), "SIGN ME UP"));
 
         String actualEmailType = getSingUpPage().typeCheckEmail();
@@ -40,9 +41,10 @@ public class SingUpTests extends BaseTest{
         Assert.assertEquals(actualConfirmPasswordType,"password");
     }
 
+    // Verify that the error contains the message "E-mail already exists" when you try to sing up with existing user.
+    // Verify that the /signup route appears in the URL of the page.
     @Test
     public void displaysErrorsWhenUserAlreadyExists() {
-
         getSingUpPage().singUpWithExistingUser();
 
         String expectedResult = "E-mail already exists";
@@ -54,9 +56,10 @@ public class SingUpTests extends BaseTest{
         Assert.assertEquals(expectedResultURL, actualResultURL);
     }
 
+    // Verify that new user can sing up
+    // Verify that notification message contains the text "Important: Verify your account".
     @Test
     public void singUpTest() {
-
         getSingUpPage().singUpWithNewUser("Darko Tot", getFaker().internet().emailAddress(), "123456","123456");
 
         getDriverWait().until(ExpectedConditions.textToBe(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"), "IMPORTANT: Verify your account"));
@@ -66,6 +69,5 @@ public class SingUpTests extends BaseTest{
 
         getSingUpPage().closeNotification();
         getLoggedHomePage().isLogoutPresented();
-        getLoggedHomePage().logoutNow();
     }
 }

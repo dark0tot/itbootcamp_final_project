@@ -3,40 +3,34 @@ package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class AdminCitiesTests extends BaseTest{
+public class AdminCitiesTests extends BaseTest {
     @BeforeMethod
     public void beforeMethod() {
-        getDriver().manage().deleteAllCookies();
-        getDriver().get("https://vue-demo.daniel-avellaneda.com/");
+        super.beforeMethod();
         getHomePage().openLoginLink();
         getLoginPage().loginWithWalidCredentials();
         getLoggedHomePage().adminLink();
-        getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[3]/div[1]/a[1]"),"Cities"));
+        getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[3]/div[1]/a[1]"), "Cities"));
         getLoggedHomePage().citiesLink();
     }
 
-    @AfterMethod
-    public void afterMethod() {
-        getLoggedHomePage().logoutNow();
-    }
-
-    @Test (priority = 1)
+    // Verify that when you log in with walid credentials and go to cities page, in page URL is presented /admin/cities rout.
+    // Verify that logout button is presented when the user is logged in.
+    @Test(priority = 1)
     public void visitsTheAdminCitiesPage() {
-
         String expectedResultURL = "https://vue-demo.daniel-avellaneda.com/admin/cities";
         String actualResultURL = getLoggedHomePage().getDriver().getCurrentUrl();
-        Assert.assertEquals(expectedResultURL,actualResultURL);
+        Assert.assertEquals(expectedResultURL, actualResultURL);
 
         getLoggedHomePage().isLogoutPresented();
     }
 
-    @Test (priority = 2)
-    public void createNewCityTest(){
-
+    // Verify that when user create new city info message appears and contains text "Saved successfully".
+    @Test(priority = 2)
+    public void createNewCityTest() {
         getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.className("btnNewItem"), "NEW ITEM"));
 
         getCitiesPage().addNewCity("Shibby");
@@ -52,9 +46,9 @@ public class AdminCitiesTests extends BaseTest{
     getCitiesPage().getDeleteCityConfirm().click();*/
     }
 
-    @Test (priority = 3)
+    // Verify that user can edit created city and info message with "Saved successfully" is presented.
+    @Test(priority = 3)
     public void editCity() {
-
         getCitiesPage().searchWishedCity("Shibby");
         getCitiesPage().editWishedCity();
         //getDriverWait().until(ExpectedConditions.textToBe(By.xpath("//*[@id=\"name\"]"),"Shibby"));
@@ -67,18 +61,18 @@ public class AdminCitiesTests extends BaseTest{
         Assert.assertTrue(actualResult.contains(expectedResult));
     }
 
-    @Test (priority = 4)
+    // Verify that searched city is presented in "Name" column.
+    @Test(priority = 4)
     public void searchCity() {
-
         getCitiesPage().searchWishedCity("Shibby - edited");
         String expectedResult = "Shibby - edited";
         String actualResult = getCitiesPage().getColumnName().getText();
         Assert.assertEquals(expectedResult, actualResult);
     }
 
-    @Test (priority = 5)
+    // Verify that user can delete created city and notification message contains "Deleted successfully".
+    @Test(priority = 5)
     public void deleteCity() {
-
         getCitiesPage().searchWishedCity("Shibby");
         getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")));
         String expectedResult = "Shibby";

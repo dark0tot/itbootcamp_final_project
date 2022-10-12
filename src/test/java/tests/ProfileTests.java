@@ -3,16 +3,13 @@ package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ProfileTests extends BaseTest{
-    @BeforeMethod
-    public void beforeMethod() {
-        getDriver().manage().deleteAllCookies();
-        getDriver().get("https://vue-demo.daniel-avellaneda.com/");
-    }
 
+    // Verify that user can edit his profile
+    // Verify that notification message is appeared and contains text "Profile saved successfully".
+    // Verify that each input now for the attribute value has the value entered within the form.
     @Test
     public void editsProfile() {
         getHomePage().openLoginLink();
@@ -28,9 +25,9 @@ public class ProfileTests extends BaseTest{
 
         getMyProfilePage().getMyProfileSaveButton().click();
 
-        getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"), "Profile saved successfuly"));
-        String expectedResultMessage = "Profile saved successfuly";
-        String actualResultMessage = getCitiesPage().getSuccessMessage().getText();
+        getDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"), "Profile saved successfully"));
+        String expectedResultMessage = "Profile saved successfully";
+        String actualResultMessage = getCitiesPage().getSuccessMessage().getText(); // actual result contains spelling error in message its word "successfuly".
         Assert.assertTrue(actualResultMessage.contains(expectedResultMessage));
 
         String expectedName = getMyProfilePage().getName();
@@ -56,7 +53,5 @@ public class ProfileTests extends BaseTest{
         String expectedGitHubProfile = getMyProfilePage().getGitHub();
         String actualGitHubProfile = getMyProfilePage().getMyProfileGitHub().getAttribute("value");
         Assert.assertEquals(actualGitHubProfile, expectedGitHubProfile);
-
-        getLoggedHomePage().logoutNow();
     }
 }

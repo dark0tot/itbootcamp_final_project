@@ -20,24 +20,31 @@ public class LoginPage extends BasePage {
     public WebElement getLoginPageShow() {
         return getDriver().findElement(loginPageShow);
     }
+
     public WebElement getEmail() {
         return getDriver().findElement(email);
     }
+
     public WebElement getPassword() {
         return getDriver().findElement(password);
     }
+
     public WebElement getLoginBtn() {
         return getDriver().findElement(loginBtn);
     }
+
     public WebElement getErrorMessage() {
         return getDriver().findElement(errorMessage);
     }
+
     public boolean isLoginPagePresented() {
         return getLoginPageShow().isDisplayed();
     }
+
     public String typeCheckEmail() {
         return getEmail().getAttribute("type");
     }
+
     public String typeCheckPassword() {
         return getPassword().getAttribute("type");
     }
