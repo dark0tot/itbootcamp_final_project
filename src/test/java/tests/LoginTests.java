@@ -35,7 +35,7 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(actualPasswordType, "password");
     }
 
-    // Verify that error message contains text "User does not exists" when you try to log in with wrong credentials.
+    // Verify that error message contains text "User does not exist" when you try to log in with wrong credentials.
     // Verify that in page URL is presented /login route.
     @Test
     public void displaysErrorsWhenUserDoesNotExist() {
